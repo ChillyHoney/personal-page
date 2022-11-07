@@ -47,6 +47,7 @@ const StyledDiv = styled.div`
   background-color: #001529;
   flex-direction: column;
   padding: 32px;
+  box-shadow: 4px 0 5px -4px #fff000;
 `;
 const ButtonWrapper = styled.div`
   flex-direction: row;

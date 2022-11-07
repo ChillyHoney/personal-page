@@ -6,23 +6,16 @@ import {
   HomeOutlined,
   MailOutlined,
   SolutionOutlined,
+  MenuOutlined,
 } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
+import { MenuProps } from 'antd';
 import { Button, Menu } from 'antd';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import SideBox from './SideBox';
+import { device } from '../misc/styledBreakpoints';
 
 type MenuItem = Required<MenuProps>['items'][number];
-
-const MenuUnfoldIcon = styled(MenuUnfoldOutlined)`
-  color: #2b2b2b;
-  font-size: 18px;
-`;
-const MenuFoldIcon = styled(MenuFoldOutlined)`
-  color: #2b2b2b;
-  font-size: 18px;
-`;
 
 const getItem = (
   label: React.ReactNode,
@@ -48,7 +41,7 @@ const items: MenuItem[] = [
 ];
 
 const SideNav: React.FC = () => {
-  const [active, setActive] = useState<boolean>(true);
+  const [active, setActive] = useState<boolean>(false);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -77,13 +70,18 @@ const SideNav: React.FC = () => {
         type='primary'
         onClick={() => setActive(!active)}
       >
-        {active ? <MenuUnfoldIcon /> : <MenuFoldIcon />}
+        <MenuIcon />
       </MenuButton>
     </Wrapper>
   );
 };
 
 export default SideNav;
+
+const MenuIcon = styled(MenuOutlined)`
+  color: #2b2b2b;
+  font-size: 18px;
+`;
 
 const MenuWrapper = styled('div')<{ active: boolean }>`
   display: flex;
@@ -93,15 +91,18 @@ const MenuWrapper = styled('div')<{ active: boolean }>`
   height: 100%;
   transition: transform 600ms;
   transform: ${(props) =>
-    props.active ? 'translate3d(0vw, 0, 0)' : 'translate3d(-100vw, 0, 0)'};
+    props.active ? 'translate3d(0vw, 0, 0)' : 'translate3d(-120vw, 0, 0)'};
+  @media ${device.laptop} {
+    transform: ${(props) =>
+      props.active ? 'translate3d(-120vw, 0, 0)' : 'translate3d(0vw, 0, 0)'};
+  }
 `;
 
 const Wrapper = styled.div`
-  background-color: pink;
-  width: 6000px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  z-index: 10;
 `;
 
 const AntDMenu = styled(Menu)`
@@ -117,5 +118,9 @@ const MenuButton = styled(Button)`
   top: 0;
   :hover {
     transform: scale(1.2, 1.2);
+  }
+
+  @media ${device.laptop} {
+    visibility: hidden;
   }
 `;

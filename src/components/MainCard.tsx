@@ -3,6 +3,7 @@ import { Button, Card, Carousel } from 'antd';
 import { CarouselRef } from 'antd/lib/carousel';
 import React, { useRef } from 'react';
 import styled from 'styled-components';
+import { device } from '../misc/styledBreakpoints';
 
 const MainCard: React.FC = () => {
   const ref = useRef<CarouselRef>(null);
@@ -14,8 +15,8 @@ const MainCard: React.FC = () => {
     },
     { levelOfJob: 'Amatorsko zajmuje się', detailOfJob: 'grafiką komputerową' },
     {
-      levelOfJob: 'W wolnej chwili interesuję się',
-      detailOfJob: 'Elektroniką, automatyzacją, mechaniką',
+      levelOfJob: 'W czasie wolnym lubię',
+      detailOfJob: 'elektronikę, automatyzacje, mechanike',
     },
     { levelOfJob: 'Z pasją i sercem', detailOfJob: 'jeżdzę motocyklami' },
   ];
@@ -66,15 +67,21 @@ const MainCard: React.FC = () => {
 export default MainCard;
 
 const LevelExperiencLabel = styled.span`
-  font-size: 48px;
+  font-size: 20px;
   font-weight: 600;
   color: #fff000;
+  @media ${device.tablet} {
+    font-size: 44px;
+  }
 `;
 
 const SubExperienceLabel = styled.p`
-  font-size: 32px;
+  font-size: 15px;
   font-weight: 300;
   color: #727e89;
+  @media ${device.tablet} {
+    font-size: 28px;
+  }
 `;
 
 const CarouselWrapper = styled.div`
@@ -95,9 +102,13 @@ const Wrapper = styled(Card)`
   margin-left: 24px;
   margin-right: 24px;
   position: fixed;
-  left: 434px;
+  left: 0;
   right: 0;
   height: 96%;
+
+  @media ${device.laptop} {
+    left: 434px;
+  }
 `;
 
 const LeftIcon = styled(UpOutlined)`
