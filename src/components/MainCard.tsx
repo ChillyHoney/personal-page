@@ -40,7 +40,7 @@ const MainCard: React.FC = () => {
           ))}
         </Carousel>
       </CarouselWrapper>
-      <ButtonWrapper>
+      <div>
         <SocialButton
           onClick={() => ref.current?.next()}
           size='large'
@@ -59,7 +59,7 @@ const MainCard: React.FC = () => {
         >
           <RightIcon />
         </SocialButton>
-      </ButtonWrapper>
+      </div>
     </Wrapper>
   );
 };
@@ -67,20 +67,22 @@ const MainCard: React.FC = () => {
 export default MainCard;
 
 const LevelExperiencLabel = styled.span`
-  font-size: 20px;
+  font-size: 6vw;
   font-weight: 600;
   color: #fff000;
+
   @media ${device.tablet} {
-    font-size: 44px;
+    font-size: 4vw;
   }
 `;
 
 const SubExperienceLabel = styled.p`
-  font-size: 15px;
+  font-size: 5vw;
   font-weight: 300;
   color: #727e89;
+
   @media ${device.tablet} {
-    font-size: 28px;
+    font-size: 3vw;
   }
 `;
 
@@ -99,12 +101,18 @@ const Wrapper = styled(Card)`
   justify-content: center;
   color: #727e89;
   border-radius: 8px;
-  margin-left: 24px;
-  margin-right: 24px;
+  margin-left: 0;
+  margin-right: 0;
   position: fixed;
   left: 0;
   right: 0;
-  height: 96%;
+  height: 100%;
+
+  @media ${device.tablet} {
+    margin-left: 24px;
+    margin-right: 24px;
+    height: 94%;
+  }
 
   @media ${device.laptop} {
     left: 434px;
@@ -116,11 +124,6 @@ const LeftIcon = styled(UpOutlined)`
 `;
 const RightIcon = styled(DownOutlined)`
   font-size: 24px;
-`;
-
-const ButtonWrapper = styled.div`
-  /* justify-content: center; */
-  /* width: 32px; */
 `;
 
 const SocialButton = styled(Button)`

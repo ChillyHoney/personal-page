@@ -91,7 +91,8 @@ const MenuWrapper = styled('div')<{ active: boolean }>`
   height: 100%;
   transition: transform 600ms;
   transform: ${(props) =>
-    props.active ? 'translate3d(0vw, 0, 0)' : 'translate3d(-120vw, 0, 0)'};
+    props.active ? 'translate3d(0vw, 0, 0)' : 'translate3d(-200vw, 0, 0)'};
+
   @media ${device.laptop} {
     transform: ${(props) =>
       props.active ? 'translate3d(-120vw, 0, 0)' : 'translate3d(0vw, 0, 0)'};
