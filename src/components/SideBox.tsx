@@ -1,6 +1,7 @@
 import { InstagramOutlined, LinkedinFilled } from '@ant-design/icons';
 import { Button } from 'antd';
 import styled from 'styled-components';
+import { device } from '../misc/styledBreakpoints';
 import MenuAvatar from './MenuAvatar';
 
 const SideBox: React.FC = () => {
@@ -17,7 +18,7 @@ const SideBox: React.FC = () => {
 
   return (
     <StyledDiv>
-      <MenuAvatar />
+      <MenuAvatar size={202} />
       <FullName>Mikołaj Wittbrodt</FullName>
       <Title>Witaj na mojej stronie!</Title>
       <ButtonWrapper>
@@ -46,9 +47,10 @@ export default SideBox;
 const StyledDiv = styled.div`
   background-color: #001529;
   flex-direction: column;
-  padding: 32px;
+  padding: 32px 18px 32px 18px;
   box-shadow: 4px 0 5px -4px #fff000;
 `;
+
 const ButtonWrapper = styled.div`
   flex-direction: row;
   align-items: center;
@@ -64,7 +66,7 @@ const ContactButton = styled(Button)`
     transform: scale(1.1, 1.1);
   }
 `;
-const FullName = styled.h3`
+const FullName = styled.h4`
   color: #fff000;
   margin-top: 16px;
 `;

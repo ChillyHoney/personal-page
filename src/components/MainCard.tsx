@@ -115,7 +115,7 @@ const Wrapper = styled(Card)`
   }
 
   @media ${device.laptop} {
-    left: 434px;
+    left: 364px;
   }
 `;
 

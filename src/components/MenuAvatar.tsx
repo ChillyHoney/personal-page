@@ -9,9 +9,9 @@ const StyledAvatar = styled(Avatar)`
   border-color: #fff000;
 `;
 
-const MenuAvatar: React.FC = () => (
+const MenuAvatar = ({ size }: { size: number }) => (
   <div>
-    <StyledAvatar src={MyAvatar} size={256} alt='My photo!' />
+    <StyledAvatar src={MyAvatar} size={size} alt='My photo!' />
   </div>
 );
 
