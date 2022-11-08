@@ -43,19 +43,9 @@ const items: MenuItem[] = [
 const SideNav: React.FC = () => {
   const [active, setActive] = useState<boolean>(false);
 
-  const ref = useRef<HTMLDivElement>(null);
-
-  const [width, setWidth] = useState<number>(0);
-
-  useLayoutEffect(() => {
-    if (ref.current != null) return setWidth(ref.current.offsetWidth);
-  }, []);
-
-  console.log(width);
-
   return (
     <Wrapper>
-      <MenuWrapper active={active} ref={ref}>
+      <MenuWrapper active={active}>
         <AntDMenu
           defaultSelectedKeys={['Dashboard']}
           mode='inline'
@@ -89,11 +79,19 @@ const MenuWrapper = styled('div')<{ active: boolean }>`
   left: 0;
   top: 0;
   height: 100%;
+  width: 100%;
   transition: transform 600ms;
   transform: ${(props) =>
     props.active ? 'translate3d(0vw, 0, 0)' : 'translate3d(-200vw, 0, 0)'};
 
+  @media ${device.tablet} {
+    width: 350px;
+    transform: ${(props) =>
+      props.active ? 'translate3d(-120vw, 0, 0)' : 'translate3d(0vw, 0, 0)'};
+  }
+
   @media ${device.laptop} {
+    width: 350px;
     transform: ${(props) =>
       props.active ? 'translate3d(-120vw, 0, 0)' : 'translate3d(0vw, 0, 0)'};
   }
