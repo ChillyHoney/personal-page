@@ -1,8 +1,6 @@
 import {
   GithubOutlined,
   UserOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   HomeOutlined,
   MailOutlined,
   SolutionOutlined,
@@ -10,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import { MenuProps } from 'antd';
 import { Button, Menu } from 'antd';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SideBox from './SideBox';
 import { device } from '../misc/styledBreakpoints';
