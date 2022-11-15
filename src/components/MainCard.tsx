@@ -4,12 +4,15 @@ import styled from 'styled-components';
 import { device } from '../misc/styledBreakpoints';
 import AboutMe from '../pages/AboutMe';
 import Dashboard from '../pages/Dashboard';
+import { Route, Routes } from 'react-router-dom';
 
-const MainCard: React.FC = () => {
+const MainCard = () => {
   return (
     <Wrapper>
-      {/* <Dashboard /> */}
-      <AboutMe />
+      <Routes>
+        <Route path='/' element={<Dashboard />} />
+        <Route path='/about' element={<AboutMe />} />
+      </Routes>
     </Wrapper>
   );
 };
