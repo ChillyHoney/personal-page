@@ -24,6 +24,7 @@ const SideBox: React.FC = () => {
       <ButtonWrapper>
         {Buttons.map((button) => (
           <SocialButton
+            key={button.link}
             href={button.link}
             size='large'
             shape='circle'
