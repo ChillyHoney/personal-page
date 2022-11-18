@@ -22,7 +22,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <>
+    <Wrapper>
       <CarouselWrapper>
         <Carousel
           ref={ref}
@@ -33,7 +33,7 @@ const Dashboard = () => {
           dotPosition='right'
         >
           {WhatImDoing.map((job) => (
-            <div>
+            <div key={job.levelOfJob}>
               <LevelExperiencLabel>{job.levelOfJob}</LevelExperiencLabel>
               <SubExperienceLabel>{job.detailOfJob}</SubExperienceLabel>
             </div>
@@ -60,7 +60,7 @@ const Dashboard = () => {
           <RightIcon />
         </SocialButton>
       </div>
-    </>
+    </Wrapper>
   );
 };
 
@@ -84,8 +84,16 @@ const SubExperienceLabel = styled.p`
   }
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12vh;
+`;
+
 const CarouselWrapper = styled.div`
-  display: 'flex';
+  text-align: center;
   padding: 24px;
   width: 100%;
   height: 400px;

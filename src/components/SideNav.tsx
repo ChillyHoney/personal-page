@@ -5,6 +5,7 @@ import {
   MailOutlined,
   SolutionOutlined,
   MenuOutlined,
+  FileDoneOutlined,
 } from '@ant-design/icons';
 import { MenuProps } from 'antd';
 import { Button, Menu } from 'antd';
@@ -36,35 +37,42 @@ const getItem = (
 const items: MenuItem[] = [
   getItem(
     <Link style={{ color: '#828282' }} to='/'>
-      Pulpit{' '}
+      Pulpit
     </Link>,
     '/',
     <HomeOutlined />
   ),
   getItem(
     <Link style={{ color: '#828282' }} to='/about'>
-      O mnie{' '}
+      O mnie
     </Link>,
     '/about',
     <UserOutlined />
   ),
   getItem(
+    <Link style={{ color: '#828282' }} to='/experience'>
+      Doświadczenie
+    </Link>,
+    '/experience',
+    <FileDoneOutlined />
+  ),
+  getItem(
     <Link style={{ color: '#828282' }} to='/projects'>
-      Projekty{' '}
+      Projekty
     </Link>,
     '/projects',
     <GithubOutlined />
   ),
   getItem(
     <Link style={{ color: '#828282' }} to='/blog'>
-      Blog{' '}
+      Blog
     </Link>,
     '/blog',
     <SolutionOutlined />
   ),
   getItem(
     <Link style={{ color: '#828282' }} to='/contact'>
-      Kontakt{' '}
+      Kontakt
     </Link>,
     '/contact',
     <MailOutlined />
@@ -73,8 +81,7 @@ const items: MenuItem[] = [
 
 function SideNav() {
   const [active, setActive] = useState<boolean>(false);
-  const [itemName, setItemName] = useState('Select User Name');
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   const handleMenuItemClick = () => {
     if (width < 1024) setActive(!active);

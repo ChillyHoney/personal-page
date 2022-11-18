@@ -1,10 +1,9 @@
 import { InstagramOutlined, LinkedinFilled } from '@ant-design/icons';
 import { Button } from 'antd';
 import styled from 'styled-components';
-import { device } from '../misc/styledBreakpoints';
 import MenuAvatar from './MenuAvatar';
 
-const SideBox: React.FC = () => {
+const SideBox = () => {
   const Buttons = [
     {
       icon: <InstagramIcon />,
@@ -17,7 +16,7 @@ const SideBox: React.FC = () => {
   ];
 
   return (
-    <StyledDiv>
+    <Wrapper>
       <MenuAvatar size={202} />
       <FullName>Mikołaj Wittbrodt</FullName>
       <Title>Witaj na mojej stronie!</Title>
@@ -39,15 +38,17 @@ const SideBox: React.FC = () => {
         Skontaktuj się ze mną!
       </ContactButton>
       <Footer>© 2022 All rights reserved.</Footer>
-    </StyledDiv>
+    </Wrapper>
   );
 };
 
 export default SideBox;
 
-const StyledDiv = styled.div`
-  background-color: #001529;
+const Wrapper = styled.div`
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  background-color: #001529;
   padding: 32px 18px 32px 18px;
   box-shadow: 4px 0 5px -4px #fff000;
 `;
@@ -63,6 +64,7 @@ const ContactButton = styled(Button)`
   margin: 16px;
   border-width: 3px;
   font-weight: 600;
+
   :hover {
     transform: scale(1.1, 1.1);
   }
@@ -70,11 +72,13 @@ const ContactButton = styled(Button)`
 const FullName = styled.h4`
   color: #fff000;
   margin-top: 16px;
+  text-align: center;
 `;
 const Title = styled.h5`
   color: #727e89;
   margin-top: -16px;
   margin-bottom: 12px;
+  text-align: center;
 `;
 const Footer = styled.span`
   color: #727e89;
@@ -82,9 +86,9 @@ const Footer = styled.span`
   position: fixed;
   flex-direction: row;
   bottom: 0;
+  left: 102px;
   margin-bottom: 16px;
   font-size: 12px;
-  width: 100%;
 `;
 const SocialButton = styled(Button)`
   margin: 4px;
