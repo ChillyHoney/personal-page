@@ -1,11 +1,23 @@
 @import '~antd/dist/antd.less';
 .App {
-  text-align: center;
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: row;
-  align-items: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px #fff000;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffee008e;
+  border-radius: 10px;
 }

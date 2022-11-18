@@ -1,19 +1,20 @@
 import {
   GithubOutlined,
   UserOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   HomeOutlined,
   MailOutlined,
   SolutionOutlined,
   MenuOutlined,
+  FileDoneOutlined,
 } from '@ant-design/icons';
 import { MenuProps } from 'antd';
 import { Button, Menu } from 'antd';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SideBox from './SideBox';
 import { device } from '../misc/styledBreakpoints';
+import { Link, useLocation } from 'react-router-dom';
+import useWindowDimensions from '../misc/useWindowDimensions';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -32,23 +33,68 @@ const getItem = (
     type,
   } as MenuItem;
 };
+
 const items: MenuItem[] = [
-  getItem('Pulpit', 'Dashboard', <HomeOutlined />),
-  getItem('O mnie', 'About Me', <UserOutlined />),
-  getItem('Projekty', 'Projects', <GithubOutlined />),
-  getItem('Blog', 'Blog', <SolutionOutlined />),
-  getItem('Kontakt', 'Contact', <MailOutlined />),
+  getItem(
+    <Link style={{ color: '#828282' }} to='/'>
+      Pulpit
+    </Link>,
+    '/',
+    <HomeOutlined />
+  ),
+  getItem(
+    <Link style={{ color: '#828282' }} to='/about'>
+      O mnie
+    </Link>,
+    '/about',
+    <UserOutlined />
+  ),
+  getItem(
+    <Link style={{ color: '#828282' }} to='/experience'>
+      Doświadczenie
+    </Link>,
+    '/experience',
+    <FileDoneOutlined />
+  ),
+  getItem(
+    <Link style={{ color: '#828282' }} to='/projects'>
+      Projekty
+    </Link>,
+    '/projects',
+    <GithubOutlined />
+  ),
+  getItem(
+    <Link style={{ color: '#828282' }} to='/blog'>
+      Blog
+    </Link>,
+    '/blog',
+    <SolutionOutlined />
+  ),
+  getItem(
+    <Link style={{ color: '#828282' }} to='/contact'>
+      Kontakt
+    </Link>,
+    '/contact',
+    <MailOutlined />
+  ),
 ];
 
-const SideNav: React.FC = () => {
+function SideNav() {
   const [active, setActive] = useState<boolean>(false);
+  const { width } = useWindowDimensions();
+
+  const handleMenuItemClick = () => {
+    if (width < 1024) setActive(!active);
+  };
+
+  const location = useLocation();
 
   return (
     <Wrapper>
       <MenuWrapper active={active}>
         <AntDMenu
-          defaultSelectedKeys={['Dashboard']}
-          mode='inline'
+          defaultSelectedKeys={[location.pathname]}
+          onClick={handleMenuItemClick}
           theme='dark'
           items={items}
         ></AntDMenu>
@@ -64,9 +110,16 @@ const SideNav: React.FC = () => {
       </MenuButton>
     </Wrapper>
   );
-};
+}
 
 export default SideNav;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  z-index: 10;
+`;
 
 const MenuIcon = styled(MenuOutlined)`
   color: #2b2b2b;
@@ -95,13 +148,6 @@ const MenuWrapper = styled('div')<{ active: boolean }>`
     transform: ${(props) =>
       props.active ? 'translate3d(-120vw, 0, 0)' : 'translate3d(0vw, 0, 0)'};
   }
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  z-index: 10;
 `;
 
 const AntDMenu = styled(Menu)`
