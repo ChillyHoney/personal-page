@@ -1,5 +1,6 @@
 import { InstagramOutlined, LinkedinFilled } from '@ant-design/icons';
 import { Button } from 'antd';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MenuAvatar from './MenuAvatar';
 
@@ -35,7 +36,7 @@ const SideBox = () => {
         ))}
       </ButtonWrapper>
       <ContactButton shape='round' type='primary' ghost={true}>
-        Skontaktuj się ze mną!
+        <Link to='/contact'>Skontaktuj się ze mną!</Link>
       </ContactButton>
       <Footer>© 2022 All rights reserved.</Footer>
     </Wrapper>

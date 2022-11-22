@@ -11,7 +11,8 @@ module.exports = {
               'primary-color': '#fff000', // primary color for all components
               'link-color': '#fff000', // link color
               'font-size-base': '14px', // major text font size
-              'heading-color': '#3b3b3b', // heading text color
+              'heading-color': '#e0e0e0', // heading text color
+              // 'heading-color': '#3b3b3b', // heading text color
               'border-color-base': '#d9d9d9', // major border color
               // 'text-color': '#2b2b2b',
               'text-color-dark': '#d9d9d9',
