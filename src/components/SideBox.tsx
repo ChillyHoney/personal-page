@@ -35,9 +35,6 @@ const SideBox = () => {
           </SocialButton>
         ))}
       </ButtonWrapper>
-      <ContactButton shape='round' type='primary' ghost={true}>
-        <Link to='/contact'>Skontaktuj się ze mną!</Link>
-      </ContactButton>
       <Footer>© 2022 All rights reserved.</Footer>
     </Wrapper>
   );

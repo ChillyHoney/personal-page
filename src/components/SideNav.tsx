@@ -97,7 +97,7 @@ function SideNav() {
           onClick={handleMenuItemClick}
           theme='dark'
           items={items}
-        ></AntDMenu>
+        />
         <SideBox />
       </MenuWrapper>
       <MenuButton
