@@ -9,22 +9,25 @@ import {
 } from '@ant-design/icons';
 
 const PhoneIcon = styled(WhatsAppOutlined)`
-  margin-right: 8px;
-  font-size: 32px;
+  margin-right: 16px;
+  font-size: 42px;
+  color: #fff000;
 `;
 const GPSIcon = styled(EnvironmentOutlined)`
-  margin-right: 8px;
-  font-size: 32px;
+  margin-right: 16px;
+  font-size: 42px;
+  color: #fff000;
 `;
 const MailIcon = styled(MailOutlined)`
-  margin-right: 8px;
-  font-size: 32px;
+  margin-right: 16px;
+  font-size: 42px;
+  color: #fff000;
 `;
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 10 },
-};
+// const layout = {
+//   labelCol: { span: 4 },
+//   wrapperCol: { span: 16 },
+// };
 
 const validateMessages = {
   required: 'To pole jest wymagane!',
@@ -55,21 +58,22 @@ const Address = [
 const Contact = () => {
   const formRef = React.createRef<FormInstance>();
 
-  const onFinish = (values: string[]) => {
+  const onFinish = () => {
     message.success('Wiadomość wysłana!');
     formRef.current!.resetFields();
   };
 
   return (
     <Wrapper>
-      <Form
-        style={{ paddingTop: 50, paddingBottom: 50 }}
+      <Title>Skontaktuj się ze mną!</Title>
+      <MessageForm
+        style={{}}
         ref={formRef}
-        {...layout}
         name='nest-messages'
         onFinish={onFinish}
         validateMessages={validateMessages}
         size='large'
+        layout='vertical'
       >
         <Form.Item
           name={['user', 'name']}
@@ -99,18 +103,18 @@ const Contact = () => {
         >
           <Input.TextArea rows={8} />
         </Form.Item>
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 9 }}>
+        <Form.Item>
           <Button style={{ color: '#000' }} type='primary' htmlType='submit'>
-            Wyślij
+            Wyślij wiadomość
           </Button>
         </Form.Item>
-      </Form>
+      </MessageForm>
       <address>
         {Address.map((item) => (
           <AddressItemWrapper>
             <InlineWrapper>
               {item.icon}
-              <Label>{item.label}</Label>
+              <h2>{item.label}</h2>
             </InlineWrapper>
             <AddressItem>{item.content}</AddressItem>
           </AddressItemWrapper>
@@ -125,6 +129,7 @@ export default Contact;
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
+  padding-bottom: 32px;
   height: 90vh;
   overflow: scroll;
   ::-webkit-scrollbar {
@@ -141,7 +146,30 @@ const Wrapper = styled.section`
   }
 `;
 
-const Label = styled.h2``;
+const MessageForm = styled(Form)`
+  padding-top: 50;
+  padding-bottom: 50;
+  margin: auto;
+  width: 94%;
+
+  @media ${device.tablet} {
+    width: 64%;
+  }
+`;
+
+const Title = styled.h1`
+  font-size: 3rem;
+  text-align: center;
+  padding-top: 24px;
+
+  ::first-letter {
+    color: #fff000;
+  }
+
+  @media ${device.tablet} {
+    padding-top: 0;
+  }
+`;
 
 const InlineWrapper = styled.div`
   display: flex;
@@ -150,8 +178,8 @@ const InlineWrapper = styled.div`
 
 const AddressItemWrapper = styled.div`
   text-align: center;
-  padding-bottom: 16px;
+  padding-top: 16px;
 `;
 const AddressItem = styled.span`
-  font-size: 1rem;
+  font-size: 1.3rem;
 `;
