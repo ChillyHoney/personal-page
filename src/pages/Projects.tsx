@@ -2,7 +2,9 @@ import React from 'react';
 import { Card } from 'antd';
 import styled from 'styled-components';
 import PersonalPage from '../images/personalpage.png';
+import PictureMakerAPI from '../images/picturemakerAPI.jpg';
 import { device } from '../misc/styledBreakpoints';
+import { Link } from 'react-router-dom';
 
 const { Meta } = Card;
 
@@ -12,19 +14,29 @@ const ProjectsData = [
     src: PersonalPage,
     title: 'Strona personalna',
     desc: `Moja pierwsza strona biznesowa dla mojej osoby pod linkiem:
-    https://github.com/ChillyHoney/personal-page`,
+    `,
+    link: 'https://github.com/ChillyHoney/personal-page',
+  },
+  {
+    alt: 'ruby-on-rails',
+    src: PictureMakerAPI,
+    title: 'Picture Maker API',
+    desc: `API do projektu stażowego Picture Maker służacy do rejestracji i logowania na bazie postgreSQL z funckajmi CRUD oraz dodatkowmi funckjami dodawania do ulubionych`,
+    link: 'https://github.com/ChillyHoney/Picture-Maker-API',
   },
 ];
 
 const Projects = () => (
   <Wrapper>
     {ProjectsData.map((data) => (
-      <StyledCard hoverable cover={<img alt={data.alt} src={data.src} />}>
-        <Meta
-          title={data.title}
-          description={<Description>{data.desc}</Description>}
-        />
-      </StyledCard>
+      <a href={data.link}>
+        <StyledCard hoverable cover={<img alt={data.alt} src={data.src} />}>
+          <Meta
+            title={data.title}
+            description={<Description>{data.desc}</Description>}
+          />
+        </StyledCard>
+      </a>
     ))}
   </Wrapper>
 );
@@ -54,7 +66,7 @@ const Wrapper = styled.section`
 `;
 
 const StyledCard = styled(Card)`
-  padding: 16px 0 16px 0;
+  padding: 8px 8px 8px 8px;
   margin: 0 0 24px;
   background-color: #001529;
   border: 3px solid #fff000;
