@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Button, Form, FormInstance, Input, message } from 'antd';
+import { Rule } from 'antd/es/form';
 import styled from 'styled-components';
 import { device } from '../misc/styledBreakpoints';
 import {
@@ -24,11 +25,6 @@ const MailIcon = styled(MailOutlined)`
   color: #fff000;
 `;
 
-// const layout = {
-//   labelCol: { span: 4 },
-//   wrapperCol: { span: 16 },
-// };
-
 const validateMessages = {
   required: 'To pole jest wymagane!',
   types: {
@@ -40,18 +36,56 @@ const validateMessages = {
 const Address = [
   {
     label: 'Numer telefonu',
-    content: '+48 515 396 987',
+    content: <a href='tel:+48 515 396 987'>+48 515 396 987</a>,
     icon: <PhoneIcon />,
   },
   {
     label: 'Adres e-mail',
-    content: 'm.witt@int.pl',
+    content: <a href='mailto:m.witt@int.pl'>m.witt@int.pl</a>,
     icon: <MailIcon />,
   },
   {
     label: 'Lokalizacja',
-    content: 'Trójmiasto',
+    content: (
+      <a href='https://www.google.pl/maps/place/Tr%C3%B3jmiasto/@54.4295222,18.3743343,10z/data=!3m1!4b1!4m5!3m4!1s0x46fd0aa24f8d325b:0xf6d7e82b367965ac!8m2!3d54.3919577!4d18.5406663'>
+        Trójmiasto
+      </a>
+    ),
     icon: <GPSIcon />,
+  },
+];
+
+type FormItemsListType = {
+  name: string;
+  label: string;
+  rules: Rule;
+  inputType: ReactNode;
+};
+
+const FormItems: FormItemsListType[] = [
+  {
+    name: 'name',
+    label: 'Imię/ firma',
+    rules: { required: true },
+    inputType: <Input />,
+  },
+  {
+    name: 'email',
+    label: 'Email',
+    rules: { type: 'email', required: true },
+    inputType: <Input />,
+  },
+  {
+    name: 'subject',
+    label: 'Temat',
+    rules: { required: true },
+    inputType: <Input />,
+  },
+  {
+    name: 'message',
+    label: 'Wiadomość',
+    rules: { required: true },
+    inputType: <Input.TextArea rows={8} />,
   },
 ];
 
@@ -67,7 +101,6 @@ const Contact = () => {
     <Wrapper>
       <Title>Skontaktuj się ze mną!</Title>
       <MessageForm
-        style={{}}
         ref={formRef}
         name='nest-messages'
         onFinish={onFinish}
@@ -75,34 +108,16 @@ const Contact = () => {
         size='large'
         layout='vertical'
       >
-        <Form.Item
-          name={['user', 'name']}
-          label='Imię/ Firma'
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name={['user', 'email']}
-          label='Email'
-          rules={[{ type: 'email', required: true }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name={['user', 'subject']}
-          label='Temat'
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name={['user', 'message']}
-          label='Wiadomość'
-          rules={[{ required: true }]}
-        >
-          <Input.TextArea rows={8} />
-        </Form.Item>
+        {FormItems.map((item) => (
+          <Form.Item
+            key={item.name}
+            name={['user', item.name]}
+            label={item.label}
+            rules={[item.rules]}
+          >
+            {item.inputType}
+          </Form.Item>
+        ))}
         <Form.Item>
           <Button style={{ color: '#000' }} type='primary' htmlType='submit'>
             Wyślij wiadomość
@@ -111,7 +126,7 @@ const Contact = () => {
       </MessageForm>
       <address>
         {Address.map((item) => (
-          <AddressItemWrapper>
+          <AddressItemWrapper key={item.label}>
             <InlineWrapper>
               {item.icon}
               <h2>{item.label}</h2>
@@ -182,4 +197,5 @@ const AddressItemWrapper = styled.div`
 `;
 const AddressItem = styled.span`
   font-size: 1.3rem;
+  text-decoration: underline;
 `;

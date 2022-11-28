@@ -47,6 +47,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #001529;
+  border-left: 4px solid #001529;
   padding: 32px 18px 32px 18px;
   box-shadow: 4px 0 5px -4px #fff000;
 `;
@@ -56,17 +57,7 @@ const ButtonWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const ContactButton = styled(Button)`
-  padding-top: 8px;
-  padding-bottom: 32px;
-  margin: 16px;
-  border-width: 3px;
-  font-weight: 600;
 
-  :hover {
-    transform: scale(1.1, 1.1);
-  }
-`;
 const FullName = styled.h4`
   color: #fff000;
   margin-top: 16px;

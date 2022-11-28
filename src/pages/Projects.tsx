@@ -13,7 +13,7 @@ const ProjectsData = [
     alt: 'personal-page-card',
     src: PersonalPage,
     title: 'Strona personalna',
-    desc: `Moja pierwsza strona biznesowa dla mojej osoby pod linkiem:
+    desc: `Moja pierwsza strona personalna wykonana od A do Z z wykorzystaniem react, styled-components i ant design.
     `,
     link: 'https://github.com/ChillyHoney/personal-page',
   },
@@ -21,7 +21,7 @@ const ProjectsData = [
     alt: 'ruby-on-rails',
     src: PictureMakerAPI,
     title: 'Picture Maker API',
-    desc: `API do projektu stażowego Picture Maker służacy do rejestracji i logowania na bazie postgreSQL z funckajmi CRUD oraz dodatkowmi funckjami dodawania do ulubionych`,
+    desc: `API do projektu stażowego Picture Maker służacy do rejestracji i logowania na bazie postgreSQL z funckajmi CRUD oraz dodatkowmi możliwosciami dodawania do ulubionych.`,
     link: 'https://github.com/ChillyHoney/Picture-Maker-API',
   },
 ];
@@ -29,7 +29,7 @@ const ProjectsData = [
 const Projects = () => (
   <Wrapper>
     {ProjectsData.map((data) => (
-      <a href={data.link}>
+      <a href={data.link} key={data.title}>
         <StyledCard hoverable cover={<img alt={data.alt} src={data.src} />}>
           <Meta
             title={data.title}
