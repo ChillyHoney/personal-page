@@ -82,7 +82,7 @@ const ExperienceTimeLine = styled(Timeline)`
     padding-right: 24vw;
   }
   @media ${device.laptop} {
-    padding-right: 20vw;
+    padding-right: 12vw;
   }
 `;
 

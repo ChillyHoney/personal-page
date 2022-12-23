@@ -1,4 +1,11 @@
-import React, { ReactNode } from 'react';
+import React, {
+  createRef,
+  ReactNode,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Button, Form, FormInstance, Input, message } from 'antd';
 import { Rule } from 'antd/es/form';
 import styled from 'styled-components';
@@ -8,6 +15,67 @@ import {
   WhatsAppOutlined,
   EnvironmentOutlined,
 } from '@ant-design/icons';
+// import ReCAPTCHA from 'react-google-recaptcha';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+
+const Wrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 32px;
+  height: 90vh;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media ${device.tablet} {
+    overflow: scroll;
+    overflow-x: hidden;
+    ::-webkit-scrollbar {
+      display: flex;
+      width: 4px;
+    }
+  }
+`;
+
+const MessageForm = styled(Form)`
+  padding-top: 50;
+  padding-bottom: 50;
+  margin: auto;
+  width: 94%;
+
+  @media ${device.tablet} {
+    width: 64%;
+  }
+`;
+
+const Title = styled.h1`
+  font-size: 3rem;
+  text-align: center;
+  padding-top: 24px;
+
+  ::first-letter {
+    color: #fff000;
+  }
+
+  @media ${device.tablet} {
+    padding-top: 0;
+  }
+`;
+
+const InlineWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const AddressItemWrapper = styled.div`
+  text-align: center;
+  padding-top: 16px;
+`;
+const AddressItem = styled.span`
+  font-size: 1.3rem;
+  text-decoration: underline;
+`;
 
 const PhoneIcon = styled(WhatsAppOutlined)`
   margin-right: 16px;
@@ -73,7 +141,7 @@ const FormItems: FormItemsListType[] = [
     name: 'email',
     label: 'Email',
     rules: { type: 'email', required: true },
-    inputType: <Input />,
+    inputType: <Input type='email' />,
   },
   {
     name: 'subject',
@@ -88,14 +156,31 @@ const FormItems: FormItemsListType[] = [
     inputType: <Input.TextArea rows={8} />,
   },
 ];
-
 const Contact = () => {
-  const formRef = React.createRef<FormInstance>();
+  const formRef = createRef<FormInstance>();
 
-  const onFinish = () => {
+  const [token, setToken] = useState<string>('');
+  const captchaRef = useRef<HCaptcha>(null);
+
+  const onSubmit = () => {
     message.success('Wiadomość wysłana!');
+    captchaRef.current?.execute();
     formRef.current!.resetFields();
   };
+
+  const onExpire = () => {
+    console.log('hCaptcha Token Expired');
+  };
+
+  const onError = (err: any) => {
+    console.log(`hCaptcha Error: ${err}`);
+  };
+
+  useEffect(() => {
+    if (token) {
+      console.log(`hCaptcha Token: ${token}`);
+    }
+  }, [token]);
 
   return (
     <Wrapper>
@@ -103,7 +188,7 @@ const Contact = () => {
       <MessageForm
         ref={formRef}
         name='nest-messages'
-        onFinish={onFinish}
+        onFinish={onSubmit}
         validateMessages={validateMessages}
         size='large'
         layout='vertical'
@@ -118,8 +203,22 @@ const Contact = () => {
             {item.inputType}
           </Form.Item>
         ))}
+
         <Form.Item>
-          <Button style={{ color: '#000' }} type='primary' htmlType='submit'>
+          <HCaptcha
+            sitekey={process.env.REACT_APP_SITE_KEY!}
+            // sitekey='10000000-ffff-ffff-ffff-000000000001'
+            onVerify={setToken}
+            onError={onError}
+            onExpire={onExpire}
+            ref={captchaRef}
+          />
+          <Button
+            style={{ color: '#000', marginTop: '24px' }}
+            type='primary'
+            htmlType='submit'
+            disabled={!token}
+          >
             Wyślij wiadomość
           </Button>
         </Form.Item>
@@ -140,62 +239,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 32px;
-  height: 90vh;
-  overflow: scroll;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media ${device.tablet} {
-    overflow: scroll;
-    overflow-x: hidden;
-    ::-webkit-scrollbar {
-      display: flex;
-      width: 4px;
-    }
-  }
-`;
-
-const MessageForm = styled(Form)`
-  padding-top: 50;
-  padding-bottom: 50;
-  margin: auto;
-  width: 94%;
-
-  @media ${device.tablet} {
-    width: 64%;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 3rem;
-  text-align: center;
-  padding-top: 24px;
-
-  ::first-letter {
-    color: #fff000;
-  }
-
-  @media ${device.tablet} {
-    padding-top: 0;
-  }
-`;
-
-const InlineWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const AddressItemWrapper = styled.div`
-  text-align: center;
-  padding-top: 16px;
-`;
-const AddressItem = styled.span`
-  font-size: 1.3rem;
-  text-decoration: underline;
-`;

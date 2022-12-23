@@ -69,7 +69,16 @@ const LevelExperiencLabel = styled.span`
   font-weight: 600;
   color: #fff000;
 
+  @media ${device.pagers} {
+    font-size: 6vw;
+  }
+  @media ${device.mobileS} {
+    font-size: 6vw;
+  }
   @media ${device.tablet} {
+    font-size: 6vw;
+  }
+  @media ${device.laptop} {
     font-size: 4vw;
   }
 `;
@@ -79,7 +88,16 @@ const SubExperienceLabel = styled.p`
   font-weight: 300;
   color: #727e89;
 
+  @media ${device.pagers} {
+    font-size: 5vw;
+  }
+  @media ${device.mobileS} {
+    font-size: 5vw;
+  }
   @media ${device.tablet} {
+    font-size: 4vw;
+  }
+  @media ${device.laptop} {
     font-size: 3vw;
   }
 `;
