@@ -1,12 +1,5 @@
-import React, {
-  createRef,
-  ReactNode,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import { Button, Form, FormInstance, Input, message } from 'antd';
+import { ReactNode, useEffect, useRef, useState } from 'react';
+import { Button, Form, Input, message } from 'antd';
 import { Rule } from 'antd/es/form';
 import styled from 'styled-components';
 import { device } from '../misc/styledBreakpoints';
@@ -15,8 +8,8 @@ import {
   WhatsAppOutlined,
   EnvironmentOutlined,
 } from '@ant-design/icons';
-// import ReCAPTCHA from 'react-google-recaptcha';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { useForm } from '@formspree/react';
 
 const Wrapper = styled.section`
   display: flex;
@@ -60,6 +53,23 @@ const Title = styled.h1`
 
   @media ${device.tablet} {
     padding-top: 0;
+  }
+`;
+
+const SendButton = styled(Button)`
+  color: #000;
+  margin-top: 24px;
+
+  :disabled {
+    background-color: #fff000;
+    border-color: #fff000;
+    opacity: 80%;
+  }
+  :focus {
+    color: #000;
+  }
+  :hover {
+    color: #111111;
   }
 `;
 
@@ -157,30 +167,28 @@ const FormItems: FormItemsListType[] = [
   },
 ];
 const Contact = () => {
-  const formRef = createRef<FormInstance>();
-
-  const [token, setToken] = useState<string>('');
+  const formRef = useRef<any>();
   const captchaRef = useRef<HCaptcha>(null);
 
-  const onSubmit = () => {
-    message.success('Wiadomość wysłana!');
-    captchaRef.current?.execute();
-    formRef.current!.resetFields();
-  };
-
-  const onExpire = () => {
-    console.log('hCaptcha Token Expired');
-  };
-
-  const onError = (err: any) => {
-    console.log(`hCaptcha Error: ${err}`);
-  };
+  const [token, setToken] = useState<string>('');
+  const [state, handleSubmit] = useForm('xwkjewea');
 
   useEffect(() => {
-    if (token) {
-      console.log(`hCaptcha Token: ${token}`);
+    if (state.succeeded) {
+      message.success('Wiadomość została pomyślnie wysłana');
+      formRef.current.resetFields();
     }
-  }, [token]);
+  }, [state.succeeded]);
+
+  const onExpire = () => {
+    setToken('');
+    message.warning('Kod weryfikacyjny wygasł');
+  };
+
+  const onError = (err: string) => {
+    setToken('');
+    message.error(`Błąd weryfikacji antyspamowej: ${err}`);
+  };
 
   return (
     <Wrapper>
@@ -188,7 +196,9 @@ const Contact = () => {
       <MessageForm
         ref={formRef}
         name='nest-messages'
-        onFinish={onSubmit}
+        onFinish={(e: any) => {
+          handleSubmit(e);
+        }}
         validateMessages={validateMessages}
         size='large'
         layout='vertical'
@@ -206,21 +216,16 @@ const Contact = () => {
 
         <Form.Item>
           <HCaptcha
-            sitekey={process.env.REACT_APP_SITE_KEY!}
-            // sitekey='10000000-ffff-ffff-ffff-000000000001'
+            // sitekey={process.env.REACT_APP_SITE_KEY!}
+            sitekey='f3602de7-050d-47c3-9b8d-796b2910fb84'
             onVerify={setToken}
             onError={onError}
             onExpire={onExpire}
             ref={captchaRef}
           />
-          <Button
-            style={{ color: '#000', marginTop: '24px' }}
-            type='primary'
-            htmlType='submit'
-            disabled={!token}
-          >
+          <SendButton type='primary' htmlType='submit' disabled={!token}>
             Wyślij wiadomość
-          </Button>
+          </SendButton>
         </Form.Item>
       </MessageForm>
       <address>
