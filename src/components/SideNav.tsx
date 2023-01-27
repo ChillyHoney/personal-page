@@ -79,7 +79,7 @@ const items: MenuItem[] = [
   ),
 ];
 
-function SideNav() {
+const SideNav = () => {
   const [active, setActive] = useState<boolean>(false);
   const { width } = useWindowDimensions();
 
@@ -97,7 +97,7 @@ function SideNav() {
           onClick={handleMenuItemClick}
           theme='dark'
           items={items}
-        ></AntDMenu>
+        />
         <SideBox />
       </MenuWrapper>
       <MenuButton
@@ -110,7 +110,7 @@ function SideNav() {
       </MenuButton>
     </Wrapper>
   );
-}
+};
 
 export default SideNav;
 
@@ -157,7 +157,6 @@ const AntDMenu = styled(Menu)`
 const MenuButton = styled(Button)`
   margin-top: 16px;
   margin-left: 16px;
-  border: 1px;
   position: fixed;
   left: 0;
   top: 0;

@@ -6,6 +6,9 @@ import AboutMe from '../pages/AboutMe';
 import Dashboard from '../pages/Dashboard';
 import { Route, Routes } from 'react-router-dom';
 import Experience from '../pages/Experience';
+import Contact from '../pages/Contact';
+import Blog from '../pages/Blog';
+import Projects from '../pages/Projects';
 
 const MainCard = () => {
   useEffect(() => {
@@ -18,6 +21,9 @@ const MainCard = () => {
         <Route path='/' element={<Dashboard />} />
         <Route path='/about' element={<AboutMe />} />
         <Route path='/experience' element={<Experience />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/projects' element={<Projects />} />
+        <Route path='/Blog' element={<Blog />} />
       </Routes>
     </Wrapper>
   );

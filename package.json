@@ -5,6 +5,8 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@craco/craco": "^6.4.5",
+    "@formspree/react": "^2.4.1",
+    "@hcaptcha/react-hcaptcha": "^1.4.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -12,11 +14,17 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@types/react-google-recaptcha": "^2.1.5",
     "antd": "^4.23.5",
+    "axios": "^1.2.2",
     "craco-less": "^2.0.0",
+    "dotenv": "^16.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-recaptcha": "^2.1.0",
+    "react-hcaptcha": "^0.1.1",
     "react-scripts": "5.0.1",
+    "serve": "^14.1.2",
     "styled-components": "^5.3.6",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
@@ -46,10 +54,10 @@
     ]
   },
   "devDependencies": {
+    "@hcaptcha/types": "^1.0.3",
     "@types/styled-components": "^5.1.26"
   },
   "resolutions": {
     "styled-components": "^5"
   }
-
 }

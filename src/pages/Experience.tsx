@@ -3,32 +3,38 @@ import { Timeline } from 'antd';
 import styled from 'styled-components';
 import { device } from '../misc/styledBreakpoints';
 
-const Experience: React.FC = () => {
+const ExperienceData = [
+  {
+    period: '2021/10 -> 2022/09',
+    jobTitle: 'PPM Open Projects',
+    desc: 'Projekty były wdrażane w małym zespole deweloperskim opartym na SCRUMie. Odpowiedzialny byłem za implementacje rozwiązań w aplikacji mobilnej android/ iOS.',
+  },
+  {
+    period: '2018 -> obecnie',
+    jobTitle: 'Grafik komputerowy',
+    desc: 'Jako freelancer tworze wizualizacje firmowe, projektuje zasoby w projektach niekomercyjnych, głównie z świata fantasy oraz przygotowywuje materiały do druku.',
+  },
+  {
+    period: '2019/08 -> 2021/10',
+    jobTitle: 'Acrylex - kierownik drukarni',
+    desc: 'Zarządzałem małym zespołem dwu osobowym w procesie druku wielkoformatowego. Pomagałem klientom ustalić najlepszy rodzaj materiału do ich aktualnych wymagań, przygotowywałem pliki do druku, zarządzałem stanem magazynowym i naprawiałem drukarki.',
+  },
+  {
+    period: '2019/02 -> 2019/08',
+    jobTitle: 'Acrylex - operator drukarni UV',
+    desc: 'Moimi obowiązkami było przygotowywanie materiału do druku, konserwacja maszyny i pakowanie zlecenia dla klienta.',
+  },
+];
+
+const Experience = () => {
   return (
     <Wrapper>
       <ExperienceTimeLine mode='left'>
-        <Item label='2021/10 -> 2022/09'>
-          <Title>PPM Open Projects</Title> Projekty były wdrażane w małym
-          zespole deweloperskim opartym na SCRUMie. Odpowiedzialny byłem za
-          implementacje rozwiązań w aplikacji mobilnej android/ iOS.
-        </Item>
-        <Item label='2018 -> obecnie'>
-          <Title>Grafik komputerowy</Title> Jako freelancer tworze wizualizacje
-          firmowe, projektuje zasoby w projektach niekomercyjnych, głównie z
-          świata fantasy oraz przygotowywuje materiały do druku.
-        </Item>
-        <Item label='nwm'>
-          <Title>Acrylex - kierownik drukarni</Title> Zarządzałem małym zespołem
-          dwu osobowym w procesie druku wielkoformatowego. Pomagałem klientom
-          ustalić najlepszy rodzaj materiału do ich aktualnych wymagań,
-          przygotowywałem pliki do druku, zarządzałem stanem magazynowym i
-          naprawiałem drukarki.
-        </Item>
-        <Item label='nwm'>
-          <Title>Acrylex - Pracownik drukarni</Title> Moimi obowiązkami było
-          przygotowywanie materiału do druku, konserwacja maszyny i pakowanie
-          zlecenia dla klienta.
-        </Item>
+        {ExperienceData.map((item) => (
+          <Item key={item.jobTitle} label={item.period}>
+            <Title>{item.jobTitle}</Title> {item.desc}
+          </Item>
+        ))}
       </ExperienceTimeLine>
     </Wrapper>
   );
@@ -76,7 +82,7 @@ const ExperienceTimeLine = styled(Timeline)`
     padding-right: 24vw;
   }
   @media ${device.laptop} {
-    padding-right: 20vw;
+    padding-right: 12vw;
   }
 `;
 

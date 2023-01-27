@@ -65,21 +65,39 @@ const Dashboard = () => {
 };
 
 const LevelExperiencLabel = styled.span`
-  font-size: 6vw;
+  font-size: 1.7rem;
   font-weight: 600;
   color: #fff000;
 
+  @media ${device.pagers} {
+    font-size: 6vw;
+  }
+  @media ${device.mobileS} {
+    font-size: 6vw;
+  }
   @media ${device.tablet} {
+    font-size: 6vw;
+  }
+  @media ${device.laptop} {
     font-size: 4vw;
   }
 `;
 
 const SubExperienceLabel = styled.p`
-  font-size: 5vw;
+  font-size: 1.3rem;
   font-weight: 300;
   color: #727e89;
 
+  @media ${device.pagers} {
+    font-size: 5vw;
+  }
+  @media ${device.mobileS} {
+    font-size: 5vw;
+  }
   @media ${device.tablet} {
+    font-size: 4vw;
+  }
+  @media ${device.laptop} {
     font-size: 3vw;
   }
 `;
@@ -94,9 +112,9 @@ const Wrapper = styled.div`
 
 const CarouselWrapper = styled.div`
   text-align: center;
-  padding: 24px;
-  width: 100%;
-  height: 400px;
+  padding: 0 24px 0 24px;
+  width: 130%;
+  height: 40vh;
 `;
 
 const LeftIcon = styled(UpOutlined)`

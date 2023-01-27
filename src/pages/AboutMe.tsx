@@ -3,8 +3,66 @@ import {
   Html5Outlined,
   PartitionOutlined,
 } from '@ant-design/icons';
+import Progress from 'antd/lib/progress/progress';
 import styled from 'styled-components';
 import { device } from '../misc/styledBreakpoints';
+
+const WebIcon = styled(Html5Outlined)`
+  font-size: 6rem;
+  margin-right: 16px;
+  color: #fff000;
+`;
+const GraphicsIcon = styled(FormOutlined)`
+  font-size: 6rem;
+  margin-right: 16px;
+  color: #fff000;
+`;
+const AutomaticaIcon = styled(PartitionOutlined)`
+  font-size: 6rem;
+  margin-right: 16px;
+  color: #fff000;
+`;
+
+const Descriptions = [
+  {
+    subTitle: 'Aplikacje internetowe',
+    desc: 'Tworze responsywne strony internetowe, głównie biznesowe w technologii javascriptowej z pomocą biblioteki React.JS.',
+    icon: <WebIcon />,
+  },
+  {
+    subTitle: 'Grafika komputerowa',
+    desc: 'Jako amator samouk z około 6 letnim doświadczeniem, tworzę logotypy typu fantasy, kreuje wizerunek firmowy oraz maluje fikcyjne mapy.',
+    icon: <GraphicsIcon />,
+  },
+  {
+    subTitle: 'Automatyka',
+    desc: 'To zainteresowanie zaczynam dopiero rozwijać i w planach jest stworzenie systemu do obsługi i monitorowania zdalnego szklarnii przydomowej.',
+    icon: <AutomaticaIcon />,
+  },
+];
+
+const Skills = [
+  {
+    skill: 'Javascript/ Typescript',
+    percentage: 65,
+  },
+  {
+    skill: 'React',
+    percentage: 60,
+  },
+  {
+    skill: 'React Native',
+    percentage: 70,
+  },
+  {
+    skill: 'Ruby',
+    percentage: 35,
+  },
+  {
+    skill: 'Ruby on Rails',
+    percentage: 45,
+  },
+];
 
 const AboutMe = () => {
   return (
@@ -21,38 +79,30 @@ const AboutMe = () => {
       </StyledSection>
       <StyledSection>
         <Title style={{ marginLeft: 0 }}>Czym się zajmuję?</Title>
-        <SecondSection>
-          <WebIcon />
-          <div>
-            <SubTitle>Aplikacje internetowe</SubTitle>
-            <Description>
-              Tworze responsywne strony internetowe, głównie biznesowe w
-              technologii javascriptowej z pomocą biblioteki React.JS.
-            </Description>
-          </div>
-        </SecondSection>
-        <SecondSection>
-          <GraphicsIcon />
-          <div>
-            <SubTitle>Grafika komputerowa</SubTitle>
-            <Description>
-              Jako amator samouk z około 6 letnim doświadczeniem, tworzę
-              logotypy typu fantasy, kreuje wizerunek firmowy oraz maluje
-              fikcyjne mapy.
-            </Description>
-          </div>
-        </SecondSection>
-        <SecondSection>
-          <AutomaticaIcon />
-          <div>
-            <SubTitle>Automatyka</SubTitle>
-            <Description>
-              To zainteresowanie zaczynam dopiero rozwijać i w planach jest
-              stworzenie systemu do obsługi i monitorowania zdalnego szklarnii
-              przydomowej.
-            </Description>
-          </div>
-        </SecondSection>
+        {Descriptions.map((item) => (
+          <SecondSection key={item.subTitle}>
+            <div style={{ display: 'flex' }}>
+              {item.icon}
+              <SubTitle>{item.subTitle}</SubTitle>
+            </div>
+            <Description>{item.desc}</Description>
+          </SecondSection>
+        ))}
+      </StyledSection>
+      <StyledSection>
+        <Title style={{ marginLeft: 0 }}>Mój stack technologiczny</Title>
+
+        {Skills.map((item) => (
+          <ProgressBar key={item.skill}>
+            <Description>{item.skill}</Description>
+            <Progress
+              percent={item.percentage}
+              status='active'
+              showInfo={false}
+              strokeColor='#fff000'
+            />
+          </ProgressBar>
+        ))}
       </StyledSection>
     </Wrapper>
   );
@@ -88,6 +138,12 @@ const StyledSection = styled.section`
   justify-content: flex-start;
   align-items: flex-start;
   margin-bottom: 24px;
+`;
+
+const ProgressBar = styled.div`
+  color: #e0e0e0;
+  padding-bottom: 16px;
+  width: 100%;
 `;
 
 const Title = styled.h1`
@@ -133,22 +189,5 @@ const Description = styled.span`
 `;
 
 const SecondSection = styled.section`
-  display: flex;
   margin-bottom: 32px;
-`;
-
-const WebIcon = styled(Html5Outlined)`
-  font-size: 6rem;
-  margin-right: 16px;
-  color: #fff000;
-`;
-const GraphicsIcon = styled(FormOutlined)`
-  font-size: 6rem;
-  margin-right: 16px;
-  color: #fff000;
-`;
-const AutomaticaIcon = styled(PartitionOutlined)`
-  font-size: 6rem;
-  margin-right: 16px;
-  color: #fff000;
 `;
